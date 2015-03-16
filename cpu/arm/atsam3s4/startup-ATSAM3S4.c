@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include <deRFsam323M10_map.h>
+#include <ATSAM3S4_map.h>
 
 
 extern int main(void);

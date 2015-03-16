@@ -1,7 +1,7 @@
 #include <debug-uart.h>
 #include <string.h>
-#include <deRFsam323M10_map.h>
-#include <deRFsam323M10_dma.h>
+#include <ATSAM3S4_map.h>
+#include <ATSAM3S4_dma.h>
 #include <gpio.h>
 #include <nvic.h>
 

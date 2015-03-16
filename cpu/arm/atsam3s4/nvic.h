@@ -1,7 +1,7 @@
 #ifndef NVIC_H_LE94F5JS4D__
 #define NVIC_H_LE94F5JS4D__
-#include <deRFsam323M10_map.h>
-#include <deRFsam323M10_nvic.h>
+#include <ATSAM3S4_map.h>
+#include <ATSAM3S4_nvic.h>
 
 #define NVIC_ENABLE_INT(i) WRITE_REG(NVIC->ISER[(i)/32], 1<<((i) & 0x1f))
 #define NVIC_DISABLE_INT(i) WRITE_REG(NVIC->ICER[(i)/32], 1<<((i) & 0x1f))

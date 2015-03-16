@@ -1,5 +1,5 @@
-#include <stm32f10x_map.h>
-#include <stm32f10x_dma.h>
+#include <ATSAM3S4_map.h>
+#include <ATSAM3S4_dma.h>
 #include <gpio.h>
 #include <nvic.h>
 #include <stdint.h>

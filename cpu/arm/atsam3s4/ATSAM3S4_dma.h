@@ -1,9 +1,9 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __deRFsam323M10_DMA_H
-#define __deRFsam323M10_DMA_H
+#ifndef __ATSAM3S4_DMA_H
+#define __ATSAM3S4_DMA_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "deRFsam323M10_map.h"
+#include "ATSAM3S4_map.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* DMA Init structure definition */

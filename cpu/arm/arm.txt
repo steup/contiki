@@ -17,3 +17,8 @@
  * @defgroup stm32f103 STM32F103
  * @ingroup arm
  */
+
+/**
+ * @defgroup atsam3s4 ATSAM3S4
+ * @ingroup arm
+ */

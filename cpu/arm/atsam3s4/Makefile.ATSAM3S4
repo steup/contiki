@@ -10,16 +10,16 @@ CONTIKI_CPU_ARM=$(CONTIKI)/cpu/arm
 CONTIKI_CPU_ARM_COMMON=$(CONTIKI_CPU_ARM)/common
 
 ### Define the CPU directory
-CONTIKI_CPU=$(CONTIKI_CPU_ARM)/deRFsam323M10
+CONTIKI_CPU=$(CONTIKI_CPU_ARM)/ATSAM3S4
 
 
-### Define the source files we have in the STM32F103 port
+### Define the source files we have in the ATSAM3S4 port
 
 CONTIKI_CPU_DIRS = . ../common/dbg-io ../common/usb loader
 
 
 
-STM32F103     = clock.c debug-uart.c # interrupt-utils.c newlib-syscalls.c sys-interrupt.c rtimer-arch.c rtimer-arch-interrupt.c uip-log.c
+ATSAM3S4     = clock.c debug-uart.c # interrupt-utils.c newlib-syscalls.c sys-interrupt.c rtimer-arch.c rtimer-arch-interrupt.c uip-log.c
 
 # SYSAPPS = codeprop-otf.c
 # APPDIRS += $(CONTIKI)/cpu/at91sam7s/loader
@@ -53,14 +53,14 @@ XSLTPROC=xsltproc
 
 PROJECT_OBJECTFILES += ${addprefix $(OBJECTDIR)/,$(CONTIKI_TARGET_MAIN:.c=.o)}
 
-LINKERSCRIPT = $(CONTIKI_CPU)/deRFsam323M10$(SUBTARGET).ld
+LINKERSCRIPT = $(CONTIKI_CPU)/ATSAM3S4$(SUBTARGET).ld
 
-STARTUP=${addprefix $(OBJECTDIR)/,startup-STM32F10x.o}
+STARTUP=${addprefix $(OBJECTDIR)/,startup-ATSAM3S4.o}
 
 # JTAG program upload
 OPENOCD	 = openocd
 OPENOCD_DIR = $(CONTIKI_CPU_ARM)/openocd/ 
-OPENOCD_CFG = deRFsam323M10.cfg
+OPENOCD_CFG = ATSAM3S4.cfg
 
 # USB program upload
 SAMIAM=Sam_I_Am

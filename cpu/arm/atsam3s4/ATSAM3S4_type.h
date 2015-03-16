@@ -1,6 +1,6 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __deRFsam323M10_TYPE_H
-#define __deRFsam323M10_TYPE_H
+#ifndef __ATSAM3S4_TYPE_H
+#define __ATSAM3S4_TYPE_H
 
 /* Includes ------------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
@@ -59,6 +59,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrorStatus;
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 
-#endif /* __deRFsam323M10_TYPE_H */
+#endif /* __ATSAM3S4_TYPE_H */
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

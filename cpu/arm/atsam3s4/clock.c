@@ -1,4 +1,4 @@
-#include <deRFsam323M10_map.h>
+#include <ATSAM3S4_map.h>
 #include <nvic.h>
 #include <sys/clock.h>
 #include <sys/cc.h>
