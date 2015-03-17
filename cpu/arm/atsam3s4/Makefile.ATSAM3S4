@@ -1,44 +1,33 @@
 # Adapted from Makefile.msp430
 
-# Default to deRFsam3-23M10 
-SUBTARGET = CB
-
-
 ### Code common for all ARM CPUs
 
-CONTIKI_CPU_ARM=$(CONTIKI)/cpu/arm
-CONTIKI_CPU_ARM_COMMON=$(CONTIKI_CPU_ARM)/common
+CONTIKI_CPU_ARM = $(CONTIKI)/cpu/arm
+CONTIKI_CPU_ARM_COMMON = $(CONTIKI_CPU_ARM)/common
 
 ### Define the CPU directory
-CONTIKI_CPU=$(CONTIKI_CPU_ARM)/ATSAM3S4
-
+CONTIKI_CPU = $(CONTIKI_CPU_ARM)/$(CONTIKI_CPU_NAME)
 
 ### Define the source files we have in the ATSAM3S4 port
 
 CONTIKI_CPU_DIRS = . ../common/dbg-io ../common/usb loader
 
-
-
-ATSAM3S4     = clock.c debug-uart.c # interrupt-utils.c newlib-syscalls.c sys-interrupt.c rtimer-arch.c rtimer-arch-interrupt.c uip-log.c
-
-# SYSAPPS = codeprop-otf.c
-# APPDIRS += $(CONTIKI)/cpu/at91sam7s/loader
-
-# ELFLOADER = elfloader-otf.c elfloader-arm.c symtab.c cfs-ram.c
+CONTIKI_CPU_SRC_FILES = clock.c debug-uart.c
 
 include $(CONTIKI_CPU_ARM_COMMON)/usb/Makefile.usb
 
-include $(CONTIKI_CPU_ARM_COMMON)/SD-card/Makefile.sdcard
+#include $(CONTIKI_CPU_ARM_COMMON)/SD-card/Makefile.sdcard
 
 TARGETLIBS = random.c dbg-printf.c dbg-puts.c dbg-putchar.c dbg-sprintf.c dbg-snprintf.c strformat.c
 
-CONTIKI_TARGET_SOURCEFILES += $(deRFsam3-23M10) $(SYSAPPS) $(ELFLOADER) \
-			$(TARGETLIBS) $(UIPDRIVERS) $(USB)
+CONTIKI_TARGET_SOURCEFILES += $(CONTIKI_CPU_SRC_FILES) $(TARGETLIBS) $(UIPDRIVERS) $(USB)
 
 CONTIKI_SOURCEFILES        += $(CONTIKI_TARGET_SOURCEFILES)
 
 
 THREADS =
+
+# ToDo: hier weiter machen, neuer Compiler wird gerade gebaut => anderen hier eintragen
 
 ### Compiler definitions
 CC       = arm-elf-gcc
@@ -51,30 +40,31 @@ STRIP    = arm-elf-strip
 
 XSLTPROC=xsltproc
 
+# example addprefix: $(addprefix src/,foo bar) => 'src/foo src/bar'
+# for platform deRFsam323M10-2 OBJECTDIR contains following: obj_deRFsam323M10-2
 PROJECT_OBJECTFILES += ${addprefix $(OBJECTDIR)/,$(CONTIKI_TARGET_MAIN:.c=.o)}
 
-LINKERSCRIPT = $(CONTIKI_CPU)/ATSAM3S4$(SUBTARGET).ld
+LINKERSCRIPT = $(CONTIKI_CPU)/$(CONTIKI_CPU_NAME).ld
 
-STARTUP=${addprefix $(OBJECTDIR)/,startup-ATSAM3S4.o}
+STARTUP=${addprefix $(OBJECTDIR)/,startup-$(CONTIKI_CPU_NAME).o}
 
 # JTAG program upload
-OPENOCD	 = openocd
-OPENOCD_DIR = $(CONTIKI_CPU_ARM)/openocd/ 
-OPENOCD_CFG = ATSAM3S4.cfg
+#OPENOCD	 = openocd
+#OPENOCD_DIR = $(CONTIKI_CPU_ARM)/openocd/ 
+#OPENOCD_CFG = $(CONTIKI_CPU_NAME).cfg
 
 # USB program upload
-SAMIAM=Sam_I_Am
-SAMIAM_TTY=/dev/ttyACM0
+#SAMIAM=Sam_I_Am
+#SAMIAM_TTY=/dev/ttyACM0
 
 # Use OpenOCD by default
-PROG=openocd
+#PROG=openocd
 
 ARCH_FLAGS= -march=armv7-m -mthumb
 
 CFLAGSNO = -I. -I$(CONTIKI)/core -I$(CONTIKI_CPU) -I$(CONTIKI_CPU)/loader \
 	   -I$(CONTIKI_CPU)/dbg-io \
            -I$(CONTIKI)/platform/$(TARGET) \
-           ${addprefix -I,$(APPDIRS)} \
            -DWITH_ASCII -DMCK=$(MCK) \
            -Wall $(ARCH_FLAGS) -g -D SUBTARGET=$(SUBTARGET)
 

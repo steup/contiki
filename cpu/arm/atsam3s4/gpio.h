@@ -1,6 +1,6 @@
 #ifndef GPIO_H_LK7NAD1HN8__
 #define GPIO_H_LK7NAD1HN8__
-#include <ATSAM3S4_map.h>
+#include "atsam3s4_map.h"
 
 #define _GPIO_INPUT_ANALOG(h,l) 0
 

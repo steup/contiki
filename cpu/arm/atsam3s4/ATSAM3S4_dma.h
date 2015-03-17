@@ -3,7 +3,7 @@
 #define __ATSAM3S4_DMA_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "ATSAM3S4_map.h"
+#include "atsam3s4_map.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* DMA Init structure definition */

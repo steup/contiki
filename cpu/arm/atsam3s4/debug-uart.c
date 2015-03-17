@@ -1,9 +1,9 @@
-#include <debug-uart.h>
+#include "debug-uart.h"
 #include <string.h>
-#include <ATSAM3S4_map.h>
-#include <ATSAM3S4_dma.h>
-#include <gpio.h>
-#include <nvic.h>
+#include "atsam3s4_map.h"
+#include "atsam3s4_dma.h"
+#include "gpio.h"
+#include "nvic.h"
 
 #ifndef DBG_UART
 #define DBG_UART USART1

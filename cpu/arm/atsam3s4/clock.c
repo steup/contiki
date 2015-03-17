@@ -1,9 +1,9 @@
-#include <ATSAM3S4_map.h>
-#include <nvic.h>
+#include "atsam3s4_map.h"
+#include "nvic.h"
 #include <sys/clock.h>
 #include <sys/cc.h>
 #include <sys/etimer.h>
-#include <debug-uart.h>
+#include "debug-uart.h"
 
 static volatile clock_time_t current_clock = 0;
 static volatile unsigned long current_seconds = 0;

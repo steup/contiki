@@ -9,10 +9,10 @@
 /* NVIC Init Structure definition */
 typedef struct
 {
-  u8 NVIC_IRQChannel;
-  u8 NVIC_IRQChannelPreemptionPriority;
-  u8 NVIC_IRQChannelSubPriority;
-  FunctionalState NVIC_IRQChannelCmd;
+	u8 NVIC_IRQChannel;
+	u8 NVIC_IRQChannelPreemptionPriority;
+	u8 NVIC_IRQChannelSubPriority;
+	FunctionalState NVIC_IRQChannelCmd;
 } NVIC_InitTypeDef;
 
 /* Exported constants --------------------------------------------------------*/

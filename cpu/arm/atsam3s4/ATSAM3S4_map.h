@@ -7,8 +7,8 @@
 #endif /* EXT */
 
 /* Includes ------------------------------------------------------------------*/
-#include "ATSAM3S4_conf.h"
-#include "ATSAM3S4_type.h"
+#include "atsam3s4_conf.h"
+#include "atsam3s4_type.h"
 #include "cortexm3_macro.h"
 
 /* Exported types ------------------------------------------------------------*/
