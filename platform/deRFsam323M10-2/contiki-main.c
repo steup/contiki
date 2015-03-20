@@ -1,40 +1,39 @@
-#include <ATSAM3S4_map.h>
-#include <ATSAM3S4_dma.h>
-#include <gpio.h>
-#include <nvic.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <debug-uart.h>
 #include <sys/process.h>
 #include <sys/procinit.h>
 #include <etimer.h>
 #include <sys/autostart.h>
 #include <clock.h>
+#include "debug-uart.h"
 
 unsigned int idle_count = 0;
 
-int
-main()
+int main()
 {
-  dbg_setup_uart();
-  printf("Initialising\n");
-  
-  clock_init();
-  process_init();
-  process_start(&etimer_process, NULL);
-  autostart_start(autostart_processes);
-  printf("Processes running\n");
-  while(1) {
-    do {
-    } while(process_run() > 0);
-    idle_count++;
-    /* Idle! */
-    /* Stop processor clock */
-    /* asm("wfi"::); */ 
-  }
-  return 0;
+	dbg_setup_uart_default();
+	
+	printf("Initialising\n");
+
+	clock_init();
+	process_init();
+	
+	process_start(&etimer_process, NULL);
+	
+	autostart_start(autostart_processes);
+	
+	printf("Processes running\n");
+	
+	while (1)
+	{
+		while (process_run() > 0);
+		
+		++idle_count;
+		
+		/* Idle! */
+		/* Stop processor clock */
+		/* asm("wfi"::); */ 
+	}
+	
+	return 0;
 }
-
-
-
-
