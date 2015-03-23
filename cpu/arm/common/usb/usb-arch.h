@@ -2,7 +2,7 @@
 #define USB_ARCH_H_0Z52ZDP0H6__
 
 #include <contiki-conf.h>
-#include <usb-api.h>
+#include "usb-api.h"
 
 
 /* Includes control endpoint 0 */
@@ -41,52 +41,37 @@
 #define MAX_CTRL_DATA 128
 #endif
 
-void
-usb_arch_setup(void);
+void usb_arch_setup(void);
 
-void
-usb_arch_setup_control_endpoint(uint8_t addr);
+void usb_arch_setup_control_endpoint(uint8_t addr);
 
-void
-usb_arch_setup_bulk_endpoint(uint8_t addr);
+void usb_arch_setup_bulk_endpoint(uint8_t addr);
 
-void
-usb_arch_setup_interrupt_endpoint(uint8_t addr);
+void usb_arch_setup_interrupt_endpoint(uint8_t addr);
 
-void
-usb_arch_disable_endpoint(uint8_t addr);
+void usb_arch_disable_endpoint(uint8_t addr);
 
-void
-usb_arch_discard_all_buffers(uint8_t addr);
+void usb_arch_discard_all_buffers(uint8_t addr);
 
 /* Stall a control endpoint. The stall will be cleared when the next
    SETUP token arrives. */
-void
-usb_arch_control_stall(uint8_t addr);
+void usb_arch_control_stall(uint8_t addr);
 
 /* Set or remove a HALT condition on an endpoint */
-void
-usb_arch_halt_endpoint(uint8_t addr, int halt);
+void usb_arch_halt_endpoint(uint8_t addr, int halt);
 
-void
-usb_arch_set_configuration(uint8_t usb_configuration_value);
+void usb_arch_set_configuration(uint8_t usb_configuration_value);
 
-uint16_t
-usb_arch_get_ep_status(uint8_t addr);
+uint16_t usb_arch_get_ep_status(uint8_t addr);
 
-void
-usb_arch_set_address(uint8_t addr);
-
+void usb_arch_set_address(uint8_t addr);
 
 /* Select what process should be polled when a global event occurs. Intended for the protocol handler. Applications should use usb_set_global_event_process  */
-void
-usb_arch_set_global_event_process(struct process *p);
+void usb_arch_set_global_event_process(struct process *p);
 
-unsigned int
-usb_arch_get_global_events(void);
+unsigned int usb_arch_get_global_events(void);
 
 /* Return true if not all data has been sent to the host */
-int 
-usb_arch_send_pending(uint8_t ep_addr);
+int usb_arch_send_pending(uint8_t ep_addr);
 
 #endif /* USB_ARCH_H_0Z52ZDP0H6__ */

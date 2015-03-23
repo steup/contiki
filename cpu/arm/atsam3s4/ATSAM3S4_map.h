@@ -1,6 +1,6 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ATSAM3S4_MAP_H
-#define __ATSAM3S4_MAP_H
+#ifndef ATSAM3S4_MAP_H
+#define ATSAM3S4_MAP_H
 
 #ifndef EXT
   #define EXT extern
@@ -9,7 +9,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "atsam3s4_conf.h"
 #include "atsam3s4_type.h"
-#include "cortexm3_macro.h"
+//#include "cortexm3_macro.h"
 
 /* Exported types ------------------------------------------------------------*/
 /******************************************************************************/
@@ -7582,6 +7582,6 @@ typedef struct
 
 /* Exported functions ------------------------------------------------------- */
 
-#endif /* __STM32F10x_MAP_H */
+#endif /* ATSAM3S4_MAP_H */
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

@@ -1,3 +1,6 @@
+#ifndef USB_ATSAM3S4_H_
+#define USB_ATSAM3S4_H_
+
 #include <usb-api.h>
 
 #ifdef USB_STM32F103_ENABLE_ALT_COPY 
@@ -6,12 +9,11 @@
 
 /* Copy len bytes of data from the buffer to dedicated USB
    memory. buffer->data must be updated */
-extern void
-copy_to_hw_buffer(USBBuffer *buffer,unsigned int offset, unsigned int len);
+extern void copy_to_hw_buffer(USBBuffer *buffer,unsigned int offset, unsigned int len);
 
 /* Copy len bytes of data to the buffer from dedicated USB memory.
    buffer->data must be updated */
-extern void
-copy_from_hw_buffer(USBBuffer *buffer,unsigned int offset, unsigned int len);
-#endif
+extern void copy_from_hw_buffer(USBBuffer *buffer,unsigned int offset, unsigned int len);
+#endif /* USB_STM32F103_ENABLE_ALT_COPY */
 
+#endif /* USB_ATSAM3S4_H_ */

@@ -14,8 +14,8 @@
 *******************************************************************************/
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __CORTEXM3_MACRO_H
-#define __CORTEXM3_MACRO_H
+#ifndef CORTEXM3_MACRO_H
+#define CORTEXM3_MACRO_H
 
 /* Includes ------------------------------------------------------------------*/
 #include "atsam3s4_type.h"
@@ -48,6 +48,6 @@ u32 __GetBASEPRI(void);
 u16 __REV_HalfWord(u16 Data);
 u32 __REV_Word(u32 Data);
 
-#endif /* __CORTEXM3_MACRO_H */
+#endif /* CORTEXM3_MACRO_H */
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

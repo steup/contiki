@@ -1,9 +1,9 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ATSAM3S4_NVIC_H
-#define __ATSAM3S4_NVIC_H
+#ifndef ATSAM3S4_NVIC_H
+#define ATSAM3S4_NVIC_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "ATSAM3S4_map.h"
+#include "atsam3s4_type.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* NVIC Init Structure definition */
@@ -266,6 +266,6 @@ ITStatus NVIC_GetSystemHandlerActiveBitStatus(u32 SystemHandler);
 u32 NVIC_GetFaultHandlerSources(u32 SystemHandler);
 u32 NVIC_GetFaultAddress(u32 SystemHandler);
 
-#endif /* __STM32F10x_NVIC_H */
+#endif /* ATSAM3S4_NVIC_H */
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

@@ -77,7 +77,7 @@ static unsigned char *ptr;
 
 /*-----------------------------------------------------------------------------------*/
 void
-petsciiconv_toascii(char *buf, unsigned int len)
+petsciiconv_toascii(unsigned char *buf, unsigned int len)
 {
   static char c;
   
@@ -106,7 +106,7 @@ petsciiconv_toascii(char *buf, unsigned int len)
 }
 /*-----------------------------------------------------------------------------------*/
 void
-petsciiconv_topetscii(char *buf, unsigned int len)
+petsciiconv_topetscii(unsigned char *buf, unsigned int len)
 {
   ptr = buf;
   for(i = len; i > 0; --i) {

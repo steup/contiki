@@ -1,8 +1,9 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __ATSAM3S4_DMA_H
-#define __ATSAM3S4_DMA_H
+#ifndef ATSAM3S4_DMA_H
+#define ATSAM3S4_DMA_H
 
 /* Includes ------------------------------------------------------------------*/
+#include "atsam3s4_type.h"
 #include "atsam3s4_map.h"
 
 /* Exported types ------------------------------------------------------------*/
@@ -276,6 +277,6 @@ void DMA_ClearFlag(u32 DMA_FLAG);
 ITStatus DMA_GetITStatus(u32 DMA_IT);
 void DMA_ClearITPendingBit(u32 DMA_IT);
 
-#endif /*__STM32F10x_DMA_H */
+#endif /* ATSAM3S4_DMA_H */
 
 /******************* (C) COPYRIGHT 2008 STMicroelectronics *****END OF FILE****/

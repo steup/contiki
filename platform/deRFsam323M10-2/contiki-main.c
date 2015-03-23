@@ -1,13 +1,4 @@
-#include <stdint.h>
-#include <stdio.h>
-#include <sys/process.h>
-#include <sys/procinit.h>
-#include <etimer.h>
-#include <sys/autostart.h>
-#include <clock.h>
-#include "debug-uart.h"
-
-unsigned int idle_count = 0;
+#include "contiki-main.h"
 
 int main()
 {

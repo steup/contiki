@@ -1,3 +1,6 @@
+#ifndef ATSAM3S4_H_
+#define ATSAM3S4_H_
+
 #define _RCC
 #define _DMA
 #define _GPIOA
@@ -31,3 +34,5 @@
 #define _SPI1
 #define _SPI2
 #define _EXTI
+
+#endif /* ATSAM3S4_H_ */

@@ -1,11 +1,9 @@
-#include <stdio.h>
-#include <debug-uart.h>
-#include <string.h>
+#include "dbg-puts.h"
 
-int
-puts(const char *str)
+int puts(const char *str)
 {
-  dbg_send_bytes((unsigned char*)str, strlen(str));
-  dbg_putchar('\n');
-  return 0;
+	dbg_send_bytes((unsigned char*)str, strlen(str));
+	dbg_putchar('\n');
+	
+	return 0;
 }
