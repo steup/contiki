@@ -1,0 +1,120 @@
+#
+#  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
+#
+#  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+#			Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
+#
+#  All rights reserved
+#
+#  This script free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  The GNU General Public License can be found at
+#  http://www.gnu.org/copyleft/gpl.html.
+#
+#  This script is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  This copyright notice MUST APPEAR in all copies of the script!
+#  Thanks for all inspirations.
+#
+
+##########################################################################
+#						sam3s4 template Makefile
+##########################################################################
+
+# init makefile variables
+
+CONTIKI_CPU_SOURCEFILES =	cpu.c \
+							syscalls.c \
+							sam3s4_startup.c sam3s4_system.c \
+							drv_pmc.c drv_uart.c drv_pio.c drv_wdt.c \
+							uart_stdio.c \
+							sysclk.c sys_tick.c
+
+CONTIKI_CPU_DIRS =	. \
+					core \
+					core/component \
+					core/cortex_m3_core \
+					core/instance \
+					drivers \
+					services \
+					utils
+					
+CONTIKI_SOURCEFILES += $(CONTIKI_CPU_SOURCEFILES)
+
+# crti.o enthält _init / _fini (siehe arm-none-eabi-ld --help, options -init, -fini)
+TARGET_LIBFILES += \
+	-L /opt/arm-none-eabi/build/lib/gcc/arm-none-eabi/4.9.3/armv7-m \
+	-L /opt/arm-none-eabi/build/arm-none-eabi/lib/armv7-m \
+	-L $(OBJECTDIR) \
+	-l :crti.o \
+	-l :syscalls.o \
+	-l m \
+	-l c \
+	-l gcc
+
+########################
+# ARM/GNU C Compiler
+
+CC = arm-none-eabi-gcc
+
+# -O1 -fdata-sections -ffunction-sections -mlong-calls
+CC_OPTIMIZATION = -O0
+CC_DEBUG_LEVEL = -g3
+CC_WARNINGS = -Wall
+CC_DEFINES = -D__SAM3S4A__
+
+#CC_FLAGS = -x c -mthumb -mcpu=cortex-m3 $(CC_DEFINES) $(CC_OPTIMIZATION) $(CC_DEBUG_LEVEL) $(CC_WARNINGS) -c -pipe -fno-strict-aliasing -std=gnu99
+CFLAGS += -c -mthumb -mcpu=cortex-m3 $(CC_DEFINES) $(CC_OPTIMIZATION) $(CC_DEBUG_LEVEL) $(CC_WARNINGS) -fno-strict-aliasing -std=gnu99
+
+########################
+# ARM/GNU Archiver
+
+AR = arm-none-eabi-ar
+
+########################
+# ARM/GNU Linker
+
+LD = arm-none-eabi-ld
+
+# --gc-sections
+LD_OPTIMIZATION = -O0
+LD_SCRIPT = $(CONTIKI_CPU)/core/sam3s4_flash.ld
+
+LDFLAGS += --entry=Reset_Handler -T$(LD_SCRIPT) $(LD_OPTIMIZATION) --cref -Map contiki-$(TARGET).map
+
+########################
+# ARM/GNU ObjectCopy
+
+CP = arm-none-eabi-objcopy
+
+CP_FLAGS = -O binary
+
+CP_TRACE = @echo "  CP       " $@.bin
+
+########################
+# ARM/GNU Assembler
+AS = arm-none-eabi-as
+
+########################
+# target handling
+.PHONY: all clean
+	
+	
+CUSTOM_RULE_LINK = NO
+
+%.$(TARGET): %.co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) contiki-$(TARGET).a
+	$(TRACE_LD)
+	$(Q)$(LD) $(LDFLAGS) $(TARGET_STARTFILES) ${filter-out %.a,$^} \
+	    ${filter %.a,$^} $(TARGET_LIBFILES) -o $@
+	$(CP_TRACE)
+	$(Q)$(CP) $(CP_FLAGS) $@ $@.bin
+
+ 	
+#clean:
+#	rm -rf *.a *.o *.elf *.map *.bin obj_files/*
