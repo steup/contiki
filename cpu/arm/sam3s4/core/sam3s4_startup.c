@@ -196,35 +196,38 @@ const DeviceVectors exception_table = {
  */
 void Reset_Handler(void)
 {
-        uint32_t *pSrc, *pDest;
-		
-        /* Initialize the relocate segment */
-        pSrc = &_etext;
-        pDest = &_srelocate;
+	uint32_t *pSrc, *pDest;
 
-        if (pSrc != pDest) {
-                for (; pDest < &_erelocate;) {
-                        *pDest++ = *pSrc++;
-                }
-        }
+	/* Initialize the relocate segment */
+	pSrc = &_etext;
+	pDest = &_srelocate;
 
-        /* Clear the zero segment */
-        for (pDest = &_szero; pDest < &_ezero;) {
-                *pDest++ = 0;
-        }
+	if (pSrc != pDest)
+	{
+		for (; pDest < &_erelocate;)
+		{
+			*pDest++ = *pSrc++;
+		}
+	}
 
-        /* Set the vector table base address */
-        pSrc = (uint32_t *) & _sfixed;
-        SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
-		
-        /* Initialize the C library */
-        //__libc_init_array();
-		
-        /* Branch to main function */
-        main();
+	/* Clear the zero segment */
+	for (pDest = &_szero; pDest < &_ezero;)
+	{
+		*pDest++ = 0;
+	}
 
-        /* Infinite loop */
-        while (1);
+	/* Set the vector table base address */
+	pSrc = (uint32_t *) & _sfixed;
+	SCB->VTOR = ((uint32_t) pSrc & SCB_VTOR_TBLOFF_Msk);
+
+	/* Initialize the C library */
+	//__libc_init_array();
+
+	/* Branch to main function */
+	main();
+
+	/* Infinite loop */
+	while (1);
 }
 
 /**
@@ -232,6 +235,7 @@ void Reset_Handler(void)
  */
 void Dummy_Handler(void)
 {
-        while (1) {
-        }
+	printf("Dummy_Handler\r\n");
+
+	while (1);
 }

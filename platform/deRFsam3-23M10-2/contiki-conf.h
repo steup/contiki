@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -32,11 +32,23 @@
 #define CCIF
 #define CLIF
 
-//#define WITH_ASCII 1
+typedef long unsigned int clock_time_t;
 
-typedef unsigned int clock_time_t;
-#define CLOCK_CONF_SECOND 1000
+#define CLOCK_CONF_SECOND 		1000
+
 
 typedef unsigned int uip_stats_t;
+
+#define NETSTACK_CONF_MAC		nullmac_driver
+#define NETSTACK_CONF_RDC		nullrdc_driver
+#define NETSTACK_CONF_FRAMER	framer_802154
+#define NETSTACK_CONF_RADIO		at86rf232_driver
+
+#define DEFAULT_CHANNEL         (21)
+#define IEEE802154_CONF_PANID 	0xCAFE
+
+#define LINKADDR_CONF_SIZE 		2 // 2 (default) or 8
+
+#define UIP_CONF_BROADCAST 1
 
 #endif /* CONTIKI_CONF_H_DERFSAM3_23M10_2__ */

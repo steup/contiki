@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -27,7 +27,7 @@
 #ifndef SYS_TICK_H_
 #define SYS_TICK_H_
 
-#include <sam3s4.h>
+#include "../core/sam3s4.h"
 
 __attribute__((optimize("O0")))
 __attribute__ ((section(".ramfunc")))

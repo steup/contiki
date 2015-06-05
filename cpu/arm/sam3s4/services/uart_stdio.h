@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -27,16 +27,16 @@
 #ifndef UART_STDIO_H_
 #define UART_STDIO_H_
 
-#include <sam3s4.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "sysclk.h"
+#include "../core/sam3s4.h"
+#include "../drivers/uart.h"
+#include "../drivers/pio.h"
+#include "../drivers/pmc.h"
 
-#include <drv_uart.h>
-#include <drv_pio.h>
-#include <drv_pmc.h>
+#include "sysclk.h"
 
 #define PINS_UART0_PIO		PIOA
 #define PINS_UART0			(PIO_PA9A_URXD0 | PIO_PA10A_UTXD0)

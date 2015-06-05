@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -29,7 +29,15 @@
 
 #include <cpu.h>
 #include <contiki.h>
-#include <contiki_interface/leds-arch.h>
+#include <contiki-net.h>
 #include <dev/serial-line.h>
+#include <dev/watchdog.h>
+#include "contiki_interface/leds-arch.h"
+
+#include "net/ip/uip.h"
+#include "net/ipv4/uip-fw.h"
+#include "net/ipv4/uip-over-mesh.h"
+
+#define UIP_OVER_MESH_CHANNEL 8
 
 #endif /* CONTIKI_MAIN_deRFsam323M10_2_H_ */

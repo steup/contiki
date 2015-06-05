@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -26,8 +26,6 @@
 
 #include "leds-arch.h"
 
-static unsigned char leds;
-
 void leds_arch_init( void )
 {
 	const uint32_t _LOW = 0;
@@ -43,9 +41,6 @@ void leds_arch_init( void )
 	
 	// set leds off
 	leds_arch_set(0);
-	
-	// led vector => leds signed as off
-	leds = 0;
 }
 
 unsigned char leds_arch_get(void)
@@ -102,6 +97,4 @@ void leds_arch_set(unsigned char l)
 	{
 		pio_set(ARCH_LED_2_PIO, ARCH_LED_2);
 	}
-	
-	leds = l;
 }

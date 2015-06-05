@@ -1,0 +1,103 @@
+#
+#  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
+#
+#  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
+#			Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
+#
+#  All rights reserved
+#
+#  This script free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  The GNU General Public License can be found at
+#  http://www.gnu.org/copyleft/gpl.html.
+#
+#  This script is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  This copyright notice MUST APPEAR in all copies of the script!
+#  Thanks for all inspirations.
+#
+
+##########################################################################
+#						at86rf232 template Makefile
+##########################################################################
+
+# init makefile variables
+
+#    $(CONTIKI_DEV)/funk_stack/MAC/Src \
+
+CONTIKI_DEV_DIRS += \
+	$(CONTIKI_DEV)/funk_stack/Include \
+    $(CONTIKI_DEV)/funk_stack/MAC/Inc \
+	$(CONTIKI_DEV)/funk_stack/RTB/Inc \
+	$(CONTIKI_DEV)/funk_stack/RTB/Src \
+	$(CONTIKI_DEV)/funk_stack/PAL/Inc \
+	$(CONTIKI_DEV)/funk_stack/Resources/Buffer_Management/Inc \
+	$(CONTIKI_DEV)/funk_stack/Resources/Buffer_Management/Src \
+	$(CONTIKI_DEV)/funk_stack/Resources/Queue_Management/Inc \
+	$(CONTIKI_DEV)/funk_stack/Resources/Queue_Management/Src \
+	$(CONTIKI_DEV)/funk_stack/TAL/Inc \
+	$(CONTIKI_DEV)/funk_stack/TAL/Src \
+	$(CONTIKI_DEV)/funk_stack/TFA/Inc \
+	$(CONTIKI_DEV)/interface/cpu/SAM3/Generic/Inc \
+	$(CONTIKI_DEV)/interface/cpu/SAM3/Generic/Src \
+	$(CONTIKI_DEV)/interface/device/at86rf232/TFA/Src \
+	$(CONTIKI_DEV)/interface/device/AT86RF232/TAL/Inc \
+	$(CONTIKI_DEV)/interface/device/AT86RF232/TAL/Src \
+	$(CONTIKI_DEV)/interface/platform/deRFsam3-23M10-2/PAL/Inc \
+	$(CONTIKI_DEV)/interface/platform/deRFsam3-23M10-2/PAL/Src
+
+# usr_mcps_data_conf.c
+# usr_mcps_data_ind.c
+# usr_mlme_set_conf.c
+# usr_mlme_get_conf.c
+# usr_mlme_reset_conf.c
+# tal_tx_frame_done_cb.c
+
+# Layer 3
+MAC_FILES = \
+	mac.c mac_api.c mac_misc.c mac_dispatcher.c mac_pib.c mac_data_ind.c mac_associate.c \
+	mac_mcps_data.c mac_disassociate.c mac_rx_enable.c mac_scan.c mac_poll.c mac_callback_wrapper.c \
+	mac_sync.c mac_process_beacon_frame.c mac_data_extract_mhr.c mac_data_req.c \
+	usr_mlme_associate_conf.c usr_mlme_beacon_notify_ind.c usr_mlme_disassociate_conf.c \
+	usr_mlme_disassociate_ind.c usr_mlme_poll_conf.c usr_mlme_rx_enable_conf.c \
+	usr_mlme_scan_conf.c usr_mlme_sync_loss_ind.c mac_process_tal_tx_frame_status.c
+
+# Layer 3
+RTB_FILES = rtb.c rtb_api.c rtb_callback_wrapper.c rtb_pib.c rtb_dispatcher.c rtb_tx.c rtb_rx.c \
+			usr_rtb_set_conf.c usr_rtb_reset_conf.c usr_rtb_range_conf.c usr_rtb_pmu_validity_ind.c \
+			mac_data_extract_mhr.c
+	
+# Layer 2
+TAL_FILES = tal.c tal_init.c tal_rx_enable.c tal_pwr_mgmt.c tal_pib.c tal_tx.c tal_rx.c tal_irq_handler.c
+
+# Layer 1
+PAL_FILES = pal.c pal_timer.c pal_trx_access.c pal_flash.c
+
+CONTIKI_DEV_SOURCEFILES += \
+	bmm.c \
+	qmm.c \
+	pal_board.c pal_irq.c \
+	$(TAL_FILES) \
+	$(PAL_FILES) \
+	tfa.c
+#	$(RTB_FILES) \
+
+CFLAGS += \
+	-DBOARD_TYPE=deRFsam3_13M10 -DINTERN_FLASH_ENABLED \
+	-DHIGHEST_STACK_LAYER=TAL \
+	-DTAL_TYPE=AT86RF232 \
+	-DPAL_GENERIC_TYPE=SAM3
+
+#	-DENABLE_RTB -DRTB_TYPE=RTB_FOR_RH \
+# -DDEBUG=100
+# -DPROMISCUOUS_MODE
+		
+#TARGET_LIBFILES += \
+	-L /mnt/hgfs/Wissenschaftliches.Teamprojekt/test/current.projekt/dev/AT86RF232/funk_stack/RTB/RTB_Lib/AT86RF233_ATXMEGA256A3_REB_8_1_CBB/GCC \
+	-l _rtb_pmu_233r.a

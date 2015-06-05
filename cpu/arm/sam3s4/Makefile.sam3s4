@@ -1,7 +1,7 @@
 #
 #  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
 #
-#  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+#  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
 #			Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
 #
 #  All rights reserved
@@ -30,9 +30,9 @@
 # init makefile variables
 
 CONTIKI_CPU_SOURCEFILES =	cpu.c \
-							syscalls.c \
+							syscalls.c temp.c\
 							sam3s4_startup.c sam3s4_system.c \
-							drv_pmc.c drv_uart.c drv_pio.c drv_wdt.c \
+							pmc.c uart.c pio.c wdt.c adc.c spi.c twi.c\
 							uart_stdio.c \
 							sysclk.c sys_tick.c
 
@@ -44,8 +44,6 @@ CONTIKI_CPU_DIRS =	. \
 					drivers \
 					services \
 					utils
-					
-CONTIKI_SOURCEFILES += $(CONTIKI_CPU_SOURCEFILES)
 
 # crti.o enthält _init / _fini (siehe arm-none-eabi-ld --help, options -init, -fini)
 TARGET_LIBFILES += \
@@ -108,10 +106,10 @@ AS = arm-none-eabi-as
 	
 CUSTOM_RULE_LINK = NO
 
-%.$(TARGET): %.co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) contiki-$(TARGET).a
+#$(PROJECT_OBJECTFILES) == contiki-main.o
+%.$(TARGET): %.co $(PROJECT_OBJECTFILES) contiki-$(TARGET).a
 	$(TRACE_LD)
-	$(Q)$(LD) $(LDFLAGS) $(TARGET_STARTFILES) ${filter-out %.a,$^} \
-	    ${filter %.a,$^} $(TARGET_LIBFILES) -o $@
+	$(Q)$(LD) $(LDFLAGS) ${filter-out %.a,$^} ${filter %.a,$^} $(TARGET_LIBFILES) -o $@
 	$(CP_TRACE)
 	$(Q)$(CP) $(CP_FLAGS) $@ $@.bin
 

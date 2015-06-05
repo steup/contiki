@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -144,7 +144,7 @@ extern int _read(int file, char *ptr, int len)
 extern int _write(int file, char *ptr, int len)
 {
 	int i;
-		
+	
 	if ( file != 1 && (p_uart_stdio != UART0 && p_uart_stdio != UART1))
 	{
 		uart_write_msg("_write error invalid file or no stdout\r\n");
@@ -152,6 +152,8 @@ extern int _write(int file, char *ptr, int len)
 		uart_write_msg_int("_write: value p_uart_stdout: ", (uint32_t)p_uart_stdio);
 		return -1;
 	}
+	
+	//uart_write_msg_int("_write, len: ", len);
 
 	for (i = 0; i < len; i++) 
 	{

@@ -1,7 +1,7 @@
 #
 #  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
 #
-#  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+#  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
 #			Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
 #
 #  All rights reserved
@@ -30,20 +30,44 @@
 # BOARD_TYPE = deRFsam3-23M10-2
 
 # global makefile var's (other makefiles use this)
-CONTIKI_TARGET_MAIN =	contiki-main.c
+CONTIKI_TARGET_MAIN = \
+	contiki-main.c
 
-CONTIKI_TARGET_DIRS = 	. \
-						contiki_interface
-	
+CONTIKI_TARGET_DIRS = \
+	. \
+	contiki_interface
+
+CONTIKI_TARGET_SOURCEFILES = \
+	leds-arch.c \
+	clock.c \
+	at86rf232_radio.c 
+
 CONTIKI_CPU_NAME = sam3s4
+CONTIKI_DEV_NAME = at86rf232
 
 # example addprefix: $(addprefix src/,foo bar) => 'src/foo src/bar'
 # for platform deRFsam3-23M10-2 OBJECTDIR contains following: obj_deRFsam3-23M10-2
 PROJECT_OBJECTFILES += ${addprefix $(OBJECTDIR)/,$(CONTIKI_TARGET_MAIN:.c=.o)}
-
-CONTIKI_SOURCEFILES += 	leds-arch.c \
-						clock.c
 	
 CONTIKI_CPU = $(CONTIKI)/cpu/arm/$(CONTIKI_CPU_NAME)
 
+CONTIKI_DEV = $(CONTIKI)/dev/$(CONTIKI_DEV_NAME)
+
+include $(CONTIKI_DEV)/Makefile.$(CONTIKI_DEV_NAME)
+
 include $(CONTIKI_CPU)/Makefile.$(CONTIKI_CPU_NAME)
+
+CONTIKI_SOURCEFILES += \
+	$(CONTIKI_TARGET_SOURCEFILES) \
+	$(CONTIKI_DEV_SOURCEFILES) \
+	$(CONTIKI_CPU_SOURCEFILES)
+
+PROJECTDIRS += \
+	$(CONTIKI_DEV_DIRS)
+	
+MODULES+=core/net \
+		 core/net/mac/contikimac \
+         core/net/mac \
+		 core/net/rime \
+         core/net/llsec
+		 

@@ -1,7 +1,7 @@
 #
 #  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
 #
-#  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+#  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
 #			Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
 #
 #  All rights reserved
@@ -26,13 +26,20 @@
 CONTIKI_PROJECT = basic-shell
 all: $(CONTIKI_PROJECT)
 
-CONTIKI_WITH_IPV4 = 0
+CONTIKI_WITH_IPV4 = 1
 CONTIKI_WITH_IPV6 = 0
-CONTIKI_WITH_RIME = 0
+CONTIKI_WITH_RIME = 1
 
-CONTIKI_SOURCEFILES += linkaddr.c
+ifeq ($(TARGET),)
+CONTIKI_WITH_RIME = 1
+endif
 
-APPS = serial-shell
+CONTIKI_SOURCEFILES +=	basic-shell-time.c \
+						basic-shell-echo.c \
+						basic-shell-broadcast.c \
+						basic-shell-ping.c 
+
+APPS =	serial-shell
 
 CONTIKI = ../..
 

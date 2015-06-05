@@ -3,7 +3,7 @@
 #
 #  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
 #
-#  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+#  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
 #			Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
 #
 #  All rights reserved
@@ -27,6 +27,11 @@
 
 export PATH=/opt/arm-none-eabi/build/bin:$PATH
 
-make clean TARGET=deRFsam3-23M10-2
+if [ "$1" == "1" ]; then
+
+	make clean TARGET=deRFsam3-23M10-2
+
+fi
+
 make TARGET=deRFsam3-23M10-2
 

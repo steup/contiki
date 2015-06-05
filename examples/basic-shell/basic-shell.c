@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -26,14 +26,27 @@
 
 #include "basic-shell.h"
 
+PROCESS(basic_shell_process, "Contiki shell");
+
+AUTOSTART_PROCESSES(&basic_shell_process);
+
 PROCESS_THREAD(basic_shell_process, ev, data)
 {
-  PROCESS_BEGIN();
-  
-  serial_shell_init();
+	PROCESS_BEGIN();
 
-  shell_base64_init();
-  shell_blink_init();
+	serial_shell_init();
 
-  PROCESS_END();
+	shell_base64_init();
+	shell_blink_init();
+	shell_ps_init();
+	//  shell_memdebug_init();
+	//  shell_text_init();
+	shell_rime_ping_init();
+//	shell_ping_init();
+	basic_shell_time_init();
+	basic_shell_echo_init();
+	basic_shell_ping_init();
+	basic_shell_broadcast_init();
+
+	PROCESS_END();
 }

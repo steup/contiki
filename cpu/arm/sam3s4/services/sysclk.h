@@ -1,7 +1,7 @@
 /*
  *  Copyright (c) 2015, Otto-von-Guericke-Universität Magdeburg (OVGU)
  *
- *  Authors:	Andé Keuns		<andre.keuns@st.ovgu.de>
+ *  Authors:	André Keuns		<andre.keuns@st.ovgu.de>
  *				Marcus Viererbe	<marcus.viererbe@st.ovgu.de>
  *
  *  All rights reserved
@@ -27,9 +27,10 @@
 #ifndef SYS_CLOCK_H_
 #define SYS_CLOCK_H_
 
-#include <sam3s4.h>
+#include "../core/sam3s4.h"
+#include "../drivers/pmc.h"
 
-static inline uint32_t sysclk_get_main_hz()
+static inline uint32_t sysclk_get_main_hz( void )
 {
 	// CSS: Master Clock Source Selection
 	uint8_t mcss = PMC->PMC_MCKR & 0x3;
@@ -71,7 +72,7 @@ static inline uint32_t sysclk_get_main_hz()
 	}
 }
 
-static inline uint32_t sysclk_get_peripheral_hz(void)
+static inline uint32_t sysclk_get_cpu_hz( void )
 {
 	uint8_t pres = PMC->PMC_MCKR & (7 << PMC_MCKR_PRES_Pos);
 	
@@ -88,7 +89,30 @@ static inline uint32_t sysclk_get_peripheral_hz(void)
 	}
 }
 
+static inline uint32_t sysclk_get_peripheral_hz( void )
+{
+	return sysclk_get_cpu_hz();
+}
+
+/*
+ * enable peripheral clock (clk_id)
+ * clk_id => id number of the peripheral clock
+ */
+static inline void sysclk_enable_peripheral_clock(uint32_t clk_id)
+{
+	pmc_enable_periph_clk(clk_id);
+}
+
+/*
+ * disable peripheral clock (clk_id)
+ * clk_id => id number of the peripheral clock
+ */
+static inline void sysclk_disable_peripheral_clock(uint32_t clk_id)
+{
+	pmc_disable_periph_clk(clk_id);
+}
+
 // sysclk_init replace the SystemInit() function from atsam3s4_system.c
-void sysclk_init();
+void sysclk_init( void );
 
 #endif /* SYS_CLOCK_H_ */
